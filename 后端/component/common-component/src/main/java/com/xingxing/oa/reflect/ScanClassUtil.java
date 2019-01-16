@@ -1,4 +1,4 @@
-package com.xingxing.oa.clazz;
+package com.xingxing.oa.reflect;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +14,13 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import java.util.stream.Collectors;
 
+/**
+ * 搜索指定包下的类
+ */
 @Slf4j
-public class ScanClass {
+public class ScanClassUtil {
     public static Set<Class<?>> getPackageClass(String packagePathStr){
-        Set<String> strPackageClass = ScanClass.scanPackageClass(packagePathStr);
+        Set<String> strPackageClass = ScanClassUtil.scanPackageClass(packagePathStr);
         return strPackageClass.stream().map(c-> {
             try {
                return Thread.currentThread().getContextClassLoader().loadClass(c);
