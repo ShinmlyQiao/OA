@@ -2,7 +2,7 @@ package com.xingxing.oa.redis.config;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -14,6 +14,7 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -28,7 +29,7 @@ import java.time.Duration;
 
 @Configuration
 @EnableCaching
-@ConditionalOnBean(value = RedisConnectionFactory.class)
+@ConditionalOnClass(RedisOperations.class)
 public class RedisCacheConfig extends CachingConfigurerSupport {
 
     @Value("spring.application.name")
@@ -63,8 +64,8 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
      */
     @Bean
     @Primary
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         StringRedisSerializer redisSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(redisSerializer);
