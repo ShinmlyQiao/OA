@@ -30,7 +30,7 @@ public class User {
     private Long genderId;
 
     @ApiModelProperty(value = "年龄")
-    private Integer age;
+    private Byte age;
 
     @ApiModelProperty(value = "出生日期")
     private LocalDate birthday;
@@ -84,5 +84,36 @@ public class User {
     @ApiModelProperty(value = "最后一次更新者id")
     private Long updateUserId;
 
+    @ApiModelProperty("是否删除")
     private Boolean deleted;
+
+    public User() {
+    }
+
+    public User(Long id, Long tenantId, String name, String headImageId, Long genderId, Byte age,
+                LocalDate birthday, Long nationId, Long countryId, String phone, String email, String qq,
+                String wechat, Long addressId, String addressDetail, String idCard, LocalDateTime createTime,
+                LocalDateTime updateTime, Long createUserId, Long updateUserId, Boolean deleted) {
+        this.id = id;
+        this.tenantId = tenantId;
+        this.name = name;
+        this.headImageId = headImageId;
+        this.genderId = genderId;
+        this.age = age;
+        this.birthday = birthday;
+        this.nationId = nationId;
+        this.countryId = countryId;
+        this.phone = phone;
+        this.email = email;
+        this.qq = qq;
+        this.wechat = wechat;
+        this.addressId = addressId;
+        this.addressDetail = addressDetail;
+        this.idCard = idCard;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.createUserId = createUserId;
+        this.updateUserId = updateUserId;
+        this.deleted = deleted;
+    }
 }
