@@ -2,6 +2,7 @@ package com.xingxing.oa.register;
 
 import com.xingxing.oa.annotions.GeneratorId;
 import com.xingxing.oa.constrants.EnviromentConstrants;
+import com.xingxing.oa.constrants.RuleConstrants;
 import com.xingxing.oa.reflect.ScanClassUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Configuration
-@ConditionalOnProperty(value =EnviromentConstrants.SCAN_PACKAGE )
+@ConditionalOnProperty(value = EnviromentConstrants.SCAN_PACKAGE )
 @Slf4j
 public class KeyIdGenerator {
 
@@ -33,6 +34,7 @@ public class KeyIdGenerator {
         log.info("程序已经启动，扫描 domain id start");
         Objects.requireNonNull(packagePath);
         Set<Class<?>> packageClass = ScanClassUtil.getPackageClass(packagePath);
+
         List<String> keyList = packageClass.stream().map(clazz -> {
             GeneratorId annotation = clazz.getAnnotation(GeneratorId.class);
             List<String> idKeyList = new ArrayList<>();
@@ -54,7 +56,7 @@ public class KeyIdGenerator {
             log.info("扫描到key:{}", keyList);
             HashOperations hashOperations = redisTemplate.opsForHash();
             keyList.stream().forEach(key -> {
-                Boolean hasPut = hashOperations.putIfAbsent("oaid", key, 1000);
+                Boolean hasPut = hashOperations.putIfAbsent(RuleConstrants.DOMAIN_KEY, key, 1000);
                 if (hasPut) {
                     log.info("{}不存在，已经新增", key);
                 } else {
@@ -64,6 +66,4 @@ public class KeyIdGenerator {
         }
         log.info("扫描 domain id finish");
     }
-
-
 }
