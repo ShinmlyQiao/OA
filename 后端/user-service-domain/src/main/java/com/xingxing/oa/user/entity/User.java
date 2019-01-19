@@ -17,11 +17,14 @@ public class User {
     @ApiModelProperty(value = "id")
     private Long id;
 
+    @ApiModelProperty(value="租户id")
+    private Long tenantId;
+
     @ApiModelProperty(value = "姓名")
     private String name;
 
     @ApiModelProperty(value = "头像唯一码")
-    private String headImage;
+    private String headImageId;
 
     @ApiModelProperty(value = "性别id")
     private Long genderId;
@@ -80,4 +83,6 @@ public class User {
     @JSONField(deserialize = false)
     @ApiModelProperty(value = "最后一次更新者id")
     private Long updateUserId;
+
+    private Boolean deleted;
 }
