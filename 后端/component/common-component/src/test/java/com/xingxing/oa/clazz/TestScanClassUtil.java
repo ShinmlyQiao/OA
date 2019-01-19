@@ -9,7 +9,7 @@ public class TestScanClassUtil {
 
     @Test
     public void test01(){
-        Set<Class<?>> strings = ScanClassUtil.getPackageClass("com");
+        Set<Class<?>> strings = ScanClassUtil.getPackageClass("com.xingxing.oa");
         strings.forEach(System.out::println);
     }
 }
