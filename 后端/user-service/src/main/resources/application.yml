@@ -1,0 +1,36 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: user-service
+  datasource:
+    platform: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: oa
+    password: xuhaixing
+    url: jdbc:mysql://192.168.94.150:3306/oa?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    name: oa
+  redis:
+    host: 192.168.94.150
+    port: 6379
+    password: xuhaixing
+    database: 1
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 8
+        min-idle: 2
+        max-wait: 2000d
+    timeout: 5000d
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+mybatis:
+  mapper-locations: classpath*:mybatis/mapping/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+
+logging:
+  level:
+    root: info

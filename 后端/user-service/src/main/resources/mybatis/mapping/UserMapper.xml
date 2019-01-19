@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xingxing.oa.user.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.xingxing.oa.user.entity.User">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="tenant_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="head_image_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="gender_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="age" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="birthday" javaType="java.time.LocalDate" jdbcType="DATE" />
+      <arg column="nation_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="country_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="qq" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="wechat" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="address_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="address_detail" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="id_card" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP" />
+      <arg column="create_user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="update_user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tenant_id, name, head_image_id, gender_id, age, birthday, nation_id, country_id, 
+    phone, email, qq, wechat, address_id, address_detail, id_card, create_time, update_time, 
+    create_user_id, update_user_id, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT} and delete = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update user set delete = 1
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xingxing.oa.user.entity.User">
+    insert into user (id, tenant_id, name, 
+      head_image_id, gender_id, age,
+      birthday, nation_id, country_id, 
+      phone, email, qq, wechat, 
+      address_id, address_detail, id_card, 
+      create_time, update_time, create_user_id, 
+      update_user_id, deleted)
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{headImageId,jdbcType=VARCHAR}, #{genderId,jdbcType=BIGINT}, #{age,jdbcType=TINYINT}, 
+      #{birthday,jdbcType=DATE}, #{nationId,jdbcType=BIGINT}, #{countryId,jdbcType=BIGINT}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
+      #{addressId,jdbcType=BIGINT}, #{addressDetail,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateUserId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xingxing.oa.user.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="headImageId != null">
+        head_image_id,
+      </if>
+      <if test="genderId != null">
+        gender_id,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="nationId != null">
+        nation_id,
+      </if>
+      <if test="countryId != null">
+        country_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="addressDetail != null">
+        address_detail,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="headImageId != null">
+        #{headImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="genderId != null">
+        #{genderId,jdbcType=BIGINT},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="nationId != null">
+        #{nationId,jdbcType=BIGINT},
+      </if>
+      <if test="countryId != null">
+        #{countryId,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null">
+        #{addressId,jdbcType=BIGINT},
+      </if>
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xingxing.oa.user.entity.User">
+    update user
+    <set>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="headImageId != null">
+        head_image_id = #{headImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="genderId != null">
+        gender_id = #{genderId,jdbcType=BIGINT},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="nationId != null">
+        nation_id = #{nationId,jdbcType=BIGINT},
+      </if>
+      <if test="countryId != null">
+        country_id = #{countryId,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=BIGINT},
+      </if>
+      <if test="addressDetail != null">
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xingxing.oa.user.entity.User">
+    update user
+    set tenant_id = #{tenantId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      head_image_id = #{headImageId,jdbcType=VARCHAR},
+      gender_id = #{genderId,jdbcType=BIGINT},
+      age = #{age,jdbcType=TINYINT},
+      birthday = #{birthday,jdbcType=DATE},
+      nation_id = #{nationId,jdbcType=BIGINT},
+      country_id = #{countryId,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      address_id = #{addressId,jdbcType=BIGINT},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
