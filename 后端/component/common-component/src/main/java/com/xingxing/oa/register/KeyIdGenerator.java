@@ -4,10 +4,12 @@ import com.xingxing.oa.annotions.GeneratorId;
 import com.xingxing.oa.constrants.EnviromentConstrants;
 import com.xingxing.oa.reflect.ScanClassUtil;
 import com.xingxing.oa.reflect.ScanFieldUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
@@ -19,14 +21,16 @@ import java.util.stream.Collectors;
 
 @Component
 @ConditionalOnProperty(EnviromentConstrants.SCAN_PACKAGE)
-public class ScanAnnotionClass {
+public class KeyIdGenerator {
 
     @Value(EnviromentConstrants.SCAN_PACKAGE)
     private String packagePath;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @EventListener(ApplicationReadyEvent.class)
-    public void registrDomainId(){
+    public void registerDomainId(){
         Set<Class<?>> packageClass = ScanClassUtil.getPackageClass(packagePath);
         List<String> idKey = packageClass.stream().map(clazz -> {
             GeneratorId annotation = clazz.getAnnotation(GeneratorId.class);
@@ -44,6 +48,8 @@ public class ScanAnnotionClass {
             return idKeyList;
         }).flatMap(flat -> flat.stream()).collect(Collectors.toList());
 
+
     }
+
 
 }
