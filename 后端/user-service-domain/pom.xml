@@ -15,9 +15,12 @@
     </parent>
 
     <properties>
+        <oa.common.component>1.1-SNAPSHOT</oa.common.component>
+        <oa.redis.component>1.0-SNAPSHOT</oa.redis.component>
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -25,6 +28,18 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+        <!--component-->
+        <dependency>
+            <groupId>com.xingxing.oa</groupId>
+            <artifactId>common-component</artifactId>
+            <version>${oa.common.component}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xingxing.oa</groupId>
+            <artifactId>redis-component</artifactId>
+            <version>${oa.redis.component}</version>
         </dependency>
     </dependencies>
 </project>

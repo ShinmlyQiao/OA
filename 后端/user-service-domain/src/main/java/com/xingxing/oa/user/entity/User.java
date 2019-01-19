@@ -3,6 +3,7 @@ package com.xingxing.oa.user.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xingxing.oa.annotions.GeneratorId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 public class User {
 
     @ApiModelProperty(value = "id")
+    @GeneratorId(value = "user-service::user::id")
     private Long id;
 
     @ApiModelProperty(value="租户id")
@@ -88,6 +90,10 @@ public class User {
     private Boolean deleted;
 
     public User() {
+        //增加默认值
+        this.createTime = LocalDateTime.now();
+        this.updateTime = LocalDateTime.now();
+        this.deleted = Boolean.FALSE;
     }
 
     public User(Long id, Long tenantId, String name, String headImageId, Long genderId, Byte age,
