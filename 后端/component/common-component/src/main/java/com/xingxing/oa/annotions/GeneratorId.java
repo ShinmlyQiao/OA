@@ -1,4 +1,4 @@
-package com.xingxing.oa.annotion;
+package com.xingxing.oa.annotions;
 
 
 import java.lang.annotation.*;

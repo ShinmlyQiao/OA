@@ -1,6 +1,6 @@
 package com.xingxing.oa.register;
 
-import com.xingxing.oa.annotion.GeneratorId;
+import com.xingxing.oa.annotions.GeneratorId;
 import com.xingxing.oa.constrants.EnviromentConstrants;
 import com.xingxing.oa.reflect.ScanClassUtil;
 import com.xingxing.oa.reflect.ScanFieldUtil;
