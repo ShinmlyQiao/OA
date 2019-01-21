@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>com.xingxing.oa</groupId>
-            <artifactId>redis-component</artifactId>
+            <artifactId>base-component</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
