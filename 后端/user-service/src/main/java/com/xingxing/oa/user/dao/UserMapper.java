@@ -1,20 +1,11 @@
 package com.xingxing.oa.user.dao;
 
 
+import com.xingxing.oa.interfaces.BaseMapper;
 import com.xingxing.oa.user.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface UserMapper {
-    int deleteByPrimaryKey(Long id);
+public interface UserMapper extends BaseMapper<User> {
 
-    int insert(User user);
-
-    int insertSelective(User user);
-
-    User selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(User user);
-
-    int updateByPrimaryKey(User user);
 }

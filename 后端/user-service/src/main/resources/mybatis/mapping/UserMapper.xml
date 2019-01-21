@@ -34,15 +34,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from oa_user
     where id = #{id,jdbcType=BIGINT} and delete = 0
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    update user set delete = 1
+    update oa_user set delete = 1
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.xingxing.oa.user.entity.User">
-    insert into user (id, tenant_id, name, 
+    insert into oa_user (id, tenant_id, name, 
       head_image_id, gender_id, age,
       birthday, nation_id, country_id, 
       phone, email, qq, wechat, 
@@ -58,7 +58,7 @@
       #{updateUserId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.xingxing.oa.user.entity.User">
-    insert into user
+    insert into oa_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -191,7 +191,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xingxing.oa.user.entity.User">
-    update user
+    update oa_user
     <set>
       <if test="tenantId != null">
         tenant_id = #{tenantId,jdbcType=BIGINT},
@@ -257,7 +257,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xingxing.oa.user.entity.User">
-    update user
+    update oa_user
     set tenant_id = #{tenantId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
       head_image_id = #{headImageId,jdbcType=VARCHAR},
