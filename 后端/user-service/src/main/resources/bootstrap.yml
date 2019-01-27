@@ -1,0 +1,27 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: user-service
+  profiles:
+    active: dev
+  cloud:
+    config:
+      enabled: true
+      label: master
+      profile: ${spring.profiles.active}
+      name: common,user
+      discovery:
+        enabled: true
+        service-id: config-server
+      #uri:
+
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.94.150:8761/eureka
+    register-with-eureka: false
+    fetch-registry: true

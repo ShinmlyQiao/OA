@@ -19,6 +19,6 @@ public class UserController {
 
     @PostMapping(value = "/add",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public int addUser(@RequestBody User user){
-        return userService.addUser(user);
+        return userService.addOne(user);
     }
 }

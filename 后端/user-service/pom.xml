@@ -3,7 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.xingxing.oa</groupId>
     <artifactId>user-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>user-service</name>
@@ -12,15 +11,25 @@
     <parent>
         <groupId>com.xingxing.oa</groupId>
         <artifactId>xingxing-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <properties>
         <oa.user.service.domain>1.0-SNAPSHOT</oa.user.service.domain>
+        <oa.common.component>1.1.1-SNAPSHOT</oa.common.component>
     </properties>
 
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,8 +59,20 @@
             <groupId>com.xingxing.oa</groupId>
             <artifactId>user-service-domain</artifactId>
             <version>${oa.user.service.domain}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.xingxing.oa</groupId>
+                    <artifactId>common-component</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
+        <!--component-->
+        <dependency>
+            <groupId>com.xingxing.oa</groupId>
+            <artifactId>common-component</artifactId>
+            <version>${oa.common.component}</version>
+        </dependency>
     </dependencies>
 
 
