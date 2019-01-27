@@ -19,4 +19,8 @@ public class StringUtils {
             throw new RuntimeException(message);
         }
     }
+
+    public static boolean isNotBlank(String str){
+        return !isBlank(str);
+    }
 }
