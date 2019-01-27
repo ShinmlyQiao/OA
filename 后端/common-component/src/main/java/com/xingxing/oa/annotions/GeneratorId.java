@@ -13,5 +13,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE,ElementType.FIELD})
 @Inherited
 public @interface GeneratorId {
+    /**
+     * 一经定义，不可更换
+     * @return
+     */
     String value();
 }
