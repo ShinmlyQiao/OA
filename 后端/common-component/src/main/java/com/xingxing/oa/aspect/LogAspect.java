@@ -8,18 +8,18 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 日志切面
  */
 
 @Slf4j
-@Component
+@Configuration
 @Aspect
 public class LogAspect {
 
-    private static final String CONTROLLER_POINT_CUT="execution(* com.xingxing.oa.user.*.*.*(..))";
+    private static final String CONTROLLER_POINT_CUT="execution(* com.xingxing.oa.*.controller.*.*(..))";
 
     @Autowired
     private ObjectMapper mapper;
