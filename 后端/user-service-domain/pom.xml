@@ -11,12 +11,11 @@
     <parent>
         <groupId>com.xingxing.oa</groupId>
         <artifactId>xingxing-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
 
     <properties>
-        <oa.common.component>1.1-SNAPSHOT</oa.common.component>
-        <oa.redis.component>1.0-SNAPSHOT</oa.redis.component>
+        <oa.common.component>1.1.1-SNAPSHOT</oa.common.component>
     </properties>
 
     <dependencies>
@@ -34,12 +33,6 @@
             <groupId>com.xingxing.oa</groupId>
             <artifactId>common-component</artifactId>
             <version>${oa.common.component}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.xingxing.oa</groupId>
-            <artifactId>redis-component</artifactId>
-            <version>${oa.redis.component}</version>
         </dependency>
     </dependencies>
 </project>

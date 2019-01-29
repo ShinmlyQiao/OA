@@ -4,6 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xingxing.oa.annotions.GeneratorId;
+import com.xingxing.oa.user.common.IdValueConstants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 public class User {
 
     @ApiModelProperty(value = "id")
-    @GeneratorId(value = "user-service::user::id")
+    @GeneratorId(value = IdValueConstants.USER_ID)
     private Long id;
 
     @ApiModelProperty(value="租户id")
@@ -90,10 +91,6 @@ public class User {
     private Boolean deleted;
 
     public User() {
-        //增加默认值
-        this.createTime = LocalDateTime.now();
-        this.updateTime = LocalDateTime.now();
-        this.deleted = Boolean.FALSE;
     }
 
     public User(Long id, Long tenantId, String name, String headImageId, Long genderId, Byte age,
@@ -121,5 +118,13 @@ public class User {
         this.createUserId = createUserId;
         this.updateUserId = updateUserId;
         this.deleted = deleted;
+    }
+
+    /**
+     * 初始化字段
+     */
+    public void init(){
+        this.updateTime = this.createTime = LocalDateTime.now();
+        this.deleted = Boolean.FALSE;
     }
 }
