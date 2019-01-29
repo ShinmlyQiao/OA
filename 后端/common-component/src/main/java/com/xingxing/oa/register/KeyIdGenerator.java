@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -27,9 +29,11 @@ public class KeyIdGenerator {
     private String packagePath;
 
     @Autowired
+    @Lazy
     private RedisTemplate redisTemplate;
 
     @EventListener(ApplicationStartedEvent.class)
+    @Async
     public void registerDomainId(){
         log.info("程序已经启动，扫描 domain id start");
         Objects.requireNonNull(packagePath);
