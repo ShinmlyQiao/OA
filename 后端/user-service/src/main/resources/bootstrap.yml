@@ -1,8 +1,6 @@
 server:
   port: 9010
 spring:
-  application:
-    name: user-service
   profiles:
     active: dev
   cloud:
@@ -15,7 +13,6 @@ spring:
         enabled: true
         service-id: config-server
       #uri:
-
 ---
 spring:
   profiles: dev
