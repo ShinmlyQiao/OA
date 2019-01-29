@@ -9,6 +9,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.request.RequestContextHolder;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 日志切面
@@ -29,26 +32,27 @@ public class LogAspect {
 
 
     @Around(value = "controllerPointCut()")
-    public Object controllerAround(ProceedingJoinPoint joinPoint){
+    public Object controllerAround(ProceedingJoinPoint joinPoint) throws Throwable{
         try {
+            HttpServletRequest request = (HttpServletRequest) RequestContextHolder.getRequestAttributes();
+            log.info("ip地址：{}",request.getRemoteAddr());
+            log.info("请求url:{}",request.getRequestURL());
             log.info("请求方法：{}", joinPoint.getSignature().toString());
 
             Object[] args = joinPoint.getArgs();
             if (args.length > 0) {
                 for (int i = 0; i < args.length; i++) {
-                    log.info("参数：{},{}", i, mapper.writeValueAsString(args));
+                    log.info("参数{}：{}", i, mapper.writeValueAsString(args));
                 }
             }
 
-            //return "拦截了";
-           Object proceed = joinPoint.proceed();
-
-            return proceed;
-
-        }catch (Throwable e){
+        }catch (Exception e){
             throw new RuntimeException("参数日志切面报错",e);
         }
 
+        Object proceed = joinPoint.proceed();
+
+        return proceed;
     }
 
 }
