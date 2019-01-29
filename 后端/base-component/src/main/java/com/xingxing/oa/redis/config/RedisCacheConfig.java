@@ -2,24 +2,13 @@ package com.xingxing.oa.redis.config;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-
-import java.lang.reflect.Method;
-import java.time.Duration;
 
 
 /**
@@ -28,8 +17,8 @@ import java.time.Duration;
  */
 
 @Configuration
-@EnableCaching
-@ConditionalOnClass(RedisOperations.class)
+//@EnableCaching
+//@ConditionalOnClass(RedisOperations.class)
 public class RedisCacheConfig extends CachingConfigurerSupport {
 
     @Value("spring.application.name")
@@ -39,22 +28,22 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
      * 自定义key,此方法会根据类名+方法名+所有参数的值生成一个
      * 唯一的key，即@Cacheable中的key
      */
-    @Override
-    public KeyGenerator keyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object o, Method method, Object... objects) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(o.getClass().getName());
-                sb.append(method.getName());
-                for (Object obj : objects) {
-                    sb.append(obj.toString());
-                }
-                System.out.println(sb);
-                return sb.toString();
-            }
-        };
-    }
+ //   @Override
+//    public KeyGenerator keyGenerator() {
+//        return new KeyGenerator() {
+//            @Override
+//            public Object generate(Object o, Method method, Object... objects) {
+//                StringBuilder sb = new StringBuilder();
+//                sb.append(o.getClass().getName());
+//                sb.append(method.getName());
+//                for (Object obj : objects) {
+//                    sb.append(obj.toString());
+//                }
+//                System.out.println(sb);
+//                return sb.toString();
+//            }
+//        };
+//    }
 
     /**
      * redisTemplate缓存操作类
@@ -80,15 +69,15 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     /**
      * 缓存管理器
      */
-    @Bean
-    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
-        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
-        config.entryTtl(Duration.ofHours(3L));
-        config.prefixKeysWith(applicationName+"::");
-        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
-        RedisCacheManager redisCacheManager = new RedisCacheManager(redisCacheWriter,config);
-        return redisCacheManager;
-    }
+//    @Bean
+//    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+//        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
+//        config.entryTtl(Duration.ofHours(3L));
+//        config.prefixKeysWith(applicationName+"::");
+//        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
+//        RedisCacheManager redisCacheManager = new RedisCacheManager(redisCacheWriter,config);
+//        return redisCacheManager;
+//    }
 
 
 }

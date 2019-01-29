@@ -4,6 +4,7 @@ import com.xingxing.oa.collection.CollectionUtils;
 import com.xingxing.oa.constrants.RuleConstrants;
 import com.xingxing.oa.string.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -15,6 +16,7 @@ import java.util.Collection;
 public class RedisUtils {
 
     @Autowired
+    @Lazy
     private RedisTemplate redisTemplate;
 
     /**
