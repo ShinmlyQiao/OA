@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,7 +35,8 @@ public class LogAspect {
     @Around(value = "controllerPointCut()")
     public Object controllerAround(ProceedingJoinPoint joinPoint) throws Throwable{
         try {
-            HttpServletRequest request = (HttpServletRequest) RequestContextHolder.getRequestAttributes();
+            ServletRequestAttributes requestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = requestAttributes.getRequest();
             log.info("ip地址：{}",request.getRemoteAddr());
             log.info("请求url:{}",request.getRequestURL());
             log.info("请求方法：{}", joinPoint.getSignature().toString());
