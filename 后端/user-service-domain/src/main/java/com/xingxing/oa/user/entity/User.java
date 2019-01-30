@@ -26,6 +26,15 @@ public class User {
     @ApiModelProperty(value = "姓名")
     private String name;
 
+    @ApiModelProperty(value = "英文名")
+    private String englishName;
+
+    @ApiModelProperty(value = "中文拼音大写名")
+    private String spellName;
+
+    @ApiModelProperty(value = "登录名")
+    private String loginName;
+
     @ApiModelProperty(value = "头像唯一码")
     private String headImageId;
 
@@ -33,7 +42,7 @@ public class User {
     private Long genderId;
 
     @ApiModelProperty(value = "年龄")
-    private Byte age;
+    private Integer age;
 
     @ApiModelProperty(value = "出生日期")
     private LocalDate birthday;
@@ -93,13 +102,17 @@ public class User {
     public User() {
     }
 
-    public User(Long id, Long tenantId, String name, String headImageId, Long genderId, Byte age,
-                LocalDate birthday, Long nationId, Long countryId, String phone, String email, String qq,
-                String wechat, Long addressId, String addressDetail, String idCard, LocalDateTime createTime,
-                LocalDateTime updateTime, Long createUserId, Long updateUserId, Boolean deleted) {
+    public User(Long id, Long tenantId, String name, String englishName, String spellName, String loginName,
+                String headImageId, Long genderId, Integer age, LocalDate birthday, Long nationId,
+                Long countryId, String phone, String email, String qq, String wechat, Long addressId,
+                String addressDetail, String idCard, LocalDateTime createTime, LocalDateTime updateTime,
+                Long createUserId, Long updateUserId, Boolean deleted) {
         this.id = id;
         this.tenantId = tenantId;
         this.name = name;
+        this.englishName = englishName;
+        this.spellName = spellName;
+        this.loginName = loginName;
         this.headImageId = headImageId;
         this.genderId = genderId;
         this.age = age;
@@ -119,6 +132,7 @@ public class User {
         this.updateUserId = updateUserId;
         this.deleted = deleted;
     }
+
 
     /**
      * 初始化字段
