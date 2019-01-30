@@ -5,4 +5,15 @@
     update oa_user set delete = 1
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
+  <select id="selectByIds" parameterType="list" resultMap="BaseResultMap" resultType="ArrayList">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM oa_user
+    WHERE
+      id IN
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        ${id}
+      </foreach>
+  </select>
 </mapper>
