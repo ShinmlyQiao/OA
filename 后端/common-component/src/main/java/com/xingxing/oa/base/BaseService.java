@@ -1,7 +1,9 @@
 package com.xingxing.oa.base;
 
+import com.xingxing.oa.collection.CollectionUtils;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 public abstract class BaseService<T> {
@@ -74,6 +76,12 @@ public abstract class BaseService<T> {
         return i;
     }
 
+    public List<T> getByIds(List<Long> ids){
+        if(CollectionUtils.isEmpty(ids)){
+            return List.of();
+        }
+        return baseMapper.selectByIds(ids);
+    }
 
 
 }
