@@ -6,9 +6,12 @@
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="tenant_id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="english_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="spell_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="login_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="head_image_id" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="gender_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="age" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="age" javaType="java.lang.Integer" jdbcType="TINYINT" />
       <arg column="birthday" javaType="java.time.LocalDate" jdbcType="DATE" />
       <arg column="nation_id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="country_id" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -27,34 +30,32 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, tenant_id, name, head_image_id, gender_id, age, birthday, nation_id, country_id, 
-    phone, email, qq, wechat, address_id, address_detail, id_card, create_time, update_time, 
-    create_user_id, update_user_id, deleted
+    id, tenant_id, name, english_name, spell_name, login_name, head_image_id, gender_id,
+    age, birthday, nation_id, country_id, phone, email, qq, wechat, address_id, address_detail,
+    id_card, create_time, update_time, create_user_id, update_user_id, deleted
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from oa_user
-    where id = #{id,jdbcType=BIGINT} and delete = 0
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    update oa_user set delete = 1
     where id = #{id,jdbcType=BIGINT}
-  </delete>
+  </select>
   <insert id="insert" parameterType="com.xingxing.oa.user.entity.User">
-    insert into oa_user (id, tenant_id, name, 
+    insert into oa_user (id, tenant_id, name,
+      english_name, spell_name, login_name,
       head_image_id, gender_id, age,
-      birthday, nation_id, country_id, 
-      phone, email, qq, wechat, 
-      address_id, address_detail, id_card, 
-      create_time, update_time, create_user_id, 
+      birthday, nation_id, country_id,
+      phone, email, qq, wechat,
+      address_id, address_detail, id_card,
+      create_time, update_time, create_user_id,
       update_user_id, deleted)
-    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{headImageId,jdbcType=VARCHAR}, #{genderId,jdbcType=BIGINT}, #{age,jdbcType=TINYINT}, 
-      #{birthday,jdbcType=DATE}, #{nationId,jdbcType=BIGINT}, #{countryId,jdbcType=BIGINT}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
-      #{addressId,jdbcType=BIGINT}, #{addressDetail,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+      #{englishName,jdbcType=VARCHAR}, #{spellName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR},
+      #{headImageId,jdbcType=VARCHAR}, #{genderId,jdbcType=BIGINT}, #{age,jdbcType=TINYINT},
+      #{birthday,jdbcType=DATE}, #{nationId,jdbcType=BIGINT}, #{countryId,jdbcType=BIGINT},
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR},
+      #{addressId,jdbcType=BIGINT}, #{addressDetail,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
       #{updateUserId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.xingxing.oa.user.entity.User">
@@ -68,6 +69,15 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="englishName != null">
+        english_name,
+      </if>
+      <if test="spellName != null">
+        spell_name,
+      </if>
+      <if test="loginName != null">
+        login_name,
       </if>
       <if test="headImageId != null">
         head_image_id,
@@ -134,6 +144,15 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="englishName != null">
+        #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="spellName != null">
+        #{spellName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
       <if test="headImageId != null">
         #{headImageId,jdbcType=VARCHAR},
       </if>
@@ -199,6 +218,15 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="englishName != null">
+        english_name = #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="spellName != null">
+        spell_name = #{spellName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
       <if test="headImageId != null">
         head_image_id = #{headImageId,jdbcType=VARCHAR},
       </if>
@@ -260,6 +288,9 @@
     update oa_user
     set tenant_id = #{tenantId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
+      spell_name = #{spellName,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
       head_image_id = #{headImageId,jdbcType=VARCHAR},
       gender_id = #{genderId,jdbcType=BIGINT},
       age = #{age,jdbcType=TINYINT},

@@ -3,6 +3,7 @@ package com.xingxing.oa.user.service;
 import com.xingxing.oa.base.BaseService;
 import com.xingxing.oa.base.IBaseMapper;
 import com.xingxing.oa.redis.utils.RedisUtils;
+import com.xingxing.oa.string.StringUtils;
 import com.xingxing.oa.user.common.IdValueConstants;
 import com.xingxing.oa.user.dao.UserMapper;
 import com.xingxing.oa.user.entity.User;
@@ -39,8 +40,14 @@ public class UserService extends BaseService<User> {
     @Override
     public void preAdd(User user) {
         Long userId = redisUtils.getDomainId(IdValueConstants.USER_ID);
+        if(StringUtils.isNotBlank(user.getSpellName())){
+            user.setSpellName(user.getSpellName().trim().toUpperCase());
+        }
         user.setId(userId);
         user.init();
+        //暂时这样
+        user.setCreateUserId(1L);
+        user.setUpdateUserId(1L);
     }
 
     @Override
